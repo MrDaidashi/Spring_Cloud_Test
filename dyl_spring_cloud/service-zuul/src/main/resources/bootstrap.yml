@@ -1,0 +1,19 @@
+
+spring:
+  application:
+    name: service-zuul
+  cloud:
+    config:
+      name: eureka-client
+      profile: dev
+      uri: http://localhost:8888/
+zuul:
+  routes:
+    api-a:
+      path: /api-a/**
+      serviceId: service-ribbon
+    api-b:
+      path: /api-b/**
+      serviceId: service-feign
+server:
+  port: 8769

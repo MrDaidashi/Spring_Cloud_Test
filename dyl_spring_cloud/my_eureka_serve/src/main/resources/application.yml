@@ -1,5 +1,5 @@
 server:
-  port: 8762
+  port: 8761
 
 eureka:
   instance:
@@ -12,5 +12,5 @@ eureka:
 
 spring:
   application:
-    name: eurka-server
+    name: eureka-server
 
