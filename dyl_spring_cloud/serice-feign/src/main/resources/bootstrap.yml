@@ -1,11 +1,12 @@
 spring:
-  application:
-    name: service-feign
   cloud:
     config:
-      name: service-feign
+      name: service-feign, eureka-client
       profile: dev
-      uri: http://localhost:8888/
+      discovery:
+        enabled: true
+        service-id: config-server
+#      uri: http://localhost:8888/
 
 feign:
   hystrix:
