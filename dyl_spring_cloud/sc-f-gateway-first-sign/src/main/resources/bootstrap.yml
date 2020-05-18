@@ -1,0 +1,32 @@
+
+server:
+  port: 5001
+spring:
+  application:
+    name: gateway-first-sign
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: false #是否与服务注册于发现组件进行结合，通过 serviceId 转发到具体的服务实例。默认为 false，设为 true 便开启通过服务中心的自动根据 serviceId 创建路由的功能
+          lower-case-service-id: true #是将请求路径上的服务名配置为小写（因为服务注册的时候，向注册中心注册时将服务名转成大写的了）
+      routes:
+        - id: service-hi
+          uri: lb://SERVICE-HI
+          predicates:
+          - Path=/demo/**
+#          并用StripPrefix的filter 在转发之前将/demo去掉
+          filters:
+          - StripPrefix=1
+        - id: feign
+          uri: lb://SERVICE-FEIGN
+          predicates:
+          - Path=/feign/**
+          filters:
+          - StripPrefix=1
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
